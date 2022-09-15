@@ -3,8 +3,7 @@ name: Java CI with GCR AND GKE
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  
 
 jobs:
   build:
