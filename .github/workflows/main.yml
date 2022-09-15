@@ -30,8 +30,9 @@ jobs:
        dockerfile: Dockerfile
        username: ${{ secrets.DOCKER_USERNAME }}
        password: ${{ secrets.DOCKER_PASSWORD }}
-    - name: publis and deploy to gcr and gke
-      uses: actions/docker-build-push-gcr-update-gke-deployment-action@v1.4
+    - name: docker-build-push-gcr-update-gke-deployment-action
+      uses: shashank0202/docker-build-push-gcr-update-gke-deployment-action@1.4
+
       with:
         service_account: ${{ secrets.GCLOUD_AUTH}} 
         zone: 'us-central1-c'
