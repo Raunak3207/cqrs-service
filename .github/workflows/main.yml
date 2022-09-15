@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Java CI with GCR AND GKE
 
 on:
   push:
