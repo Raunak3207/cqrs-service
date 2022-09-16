@@ -1,44 +1,44 @@
-name: Java CI with GCR AND GKE
+# name: Java CI with GCR AND GKE
 
-on:
-  push:
-    branches: [ "main" ]
+# on:
+#   push:
+#     branches: [ "main" ]
   
 
-jobs:
-  build:
+# jobs:
+#   build:
 
-    runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: mvn clean install
-    - name: Build & push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-       image: raunakm/qrs_event_sourcing
-       tags: latest
-       registry: docker.io
-       dockerfile: Dockerfile
-       username: ${{ secrets.DOCKER_USERNAME }}
-       password: ${{ secrets.DOCKER_PASSWORD }}
-    - name: docker-build-push-gcr-update-gke-deployment-action
-      uses: shashank0202/docker-build-push-gcr-update-gke-deployment-action@1.4
+#     steps:
+#     - uses: actions/checkout@v3
+#     - name: Set up JDK 17
+#       uses: actions/setup-java@v3
+#       with:
+#         java-version: '17'
+#         distribution: 'temurin'
+#         cache: maven
+#     - name: Build with Maven
+#       run: mvn clean install
+#     - name: Build & push Docker image
+#       uses: mr-smithers-excellent/docker-build-push@v5
+#       with:
+#        image: raunakm/qrs_event_sourcing
+#        tags: latest
+#        registry: docker.io
+#        dockerfile: Dockerfile
+#        username: ${{ secrets.DOCKER_USERNAME }}
+#        password: ${{ secrets.DOCKER_PASSWORD }}
+#     - name: docker-build-push-gcr-update-gke-deployment-action
+#       uses: shashank0202/docker-build-push-gcr-update-gke-deployment-action@1.4
 
-      with:
-        service_account: ${{ secrets.GCLOUD_AUTH}} 
-        zone: 'us-central1-c'
-        project_id: 'burner-raumaury'
-        registry: 'gcr.io'
-        image_name: 'cqrs_event_sourcing'
-        cluster: 'cluster-1'
-        namespace: 'dev'
-        deployment: 'cqrs_event_sourcing-service'
-        container: 'cqrs_event_sourcing_container'
+#       with:
+#         service_account: ${{ secrets.GCLOUD_AUTH}} 
+#         zone: 'us-central1-c'
+#         project_id: 'burner-raumaury'
+#         registry: 'gcr.io'
+#         image_name: 'cqrs_event_sourcing'
+#         cluster: 'cluster-1'
+#         namespace: 'dev'
+#         deployment: 'cqrs_event_sourcing-service'
+#         container: 'cqrs_event_sourcing_container'
