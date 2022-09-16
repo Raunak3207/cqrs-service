@@ -39,6 +39,6 @@ jobs:
         registry: 'gcr.io'
         image_name: 'cqrs_event_sourcing'
         cluster: 'cluster-1'
-        namespace: 'dev'
+        namespace: 'default'
         deployment: 'cqrs_event_sourcing-service'
         container: 'cqrs_event_sourcing_container'
