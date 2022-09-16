@@ -40,5 +40,5 @@ jobs:
         image_name: 'cqrs_event_sourcing'
         cluster: 'cluster-1'
         namespace: 'default'
-        deployment: 'cqrs_event_sourcing-service'
+        deployment: 'nginx-deployment'
         container: 'cqrs_event_sourcing_container'
