@@ -1,13 +1,9 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
-name: Java CI with Maven
+name: Java CI with GCR AND GKE
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  
 
 jobs:
   build:
@@ -33,4 +29,16 @@ jobs:
        dockerfile: Dockerfile
        username: ${{ secrets.DOCKER_USERNAME }}
        password: ${{ secrets.DOCKER_PASSWORD }}
-      
+    - name: docker-build-push-gcr-update-gke-deployment-action
+      uses: shashank0202/docker-build-push-gcr-update-gke-deployment-action@1.4
+
+      with:
+        service_account: ${{ secrets.GCLOUD_AUTH}} 
+        zone: 'us-central1-c'
+        project_id: 'burner-raumaury'
+        registry: 'gcr.io'
+        image_name: 'cqrs_event_sourcing'
+        cluster: 'cluster-1'
+        namespace: 'default'
+        deployment: 'cqrs_event_sourcing-service'
+        container: 'cqrs_event_sourcing_container'
